@@ -1,4 +1,22 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { 
+  CheckCircle, 
+  Users, 
+  Shield, 
+  DollarSign, 
+  MapPin, 
+  Settings,
+  ArrowRight,
+  Star,
+  Truck,
+  Warehouse,
+  Package,
+  Clock,
+  TrendingUp,
+  Headphones,
+  Send
+} from "lucide-react";
 
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,6 +28,7 @@ export default function LandingPage() {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -42,17 +61,8 @@ export default function LandingPage() {
         "Unloading and palletizing floor-loaded freight",
         "Floor loading freight into shipping containers"
       ],
-      icon: (
-        <svg 
-          fill="currentColor" 
-          version="1.1" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 512 512" 
-          className="w-12 h-12"
-        >
-          <path d="M469.333,64V42.667C469.333,19.136,450.197,0,426.667,0H85.333C61.803,0,42.667,19.136,42.667,42.667V64 c0,23.531,19.136,42.667,42.667,42.667v128c-23.531,0-42.667,19.136-42.667,42.667v21.333c0,23.531,19.136,42.667,42.667,42.667 v128C85.333,492.864,104.469,512,128,512h256c23.531,0,42.667-19.136,42.667-42.667v-128c23.531,0,42.667-19.136,42.667-42.667 v-21.333c0-23.531-19.136-42.667-42.667-42.667v-128C450.197,106.667,469.333,87.531,469.333,64z M277.333,405.333h-42.667 c-11.797,0-21.333-9.557-21.333-21.333s9.536-21.333,21.333-21.333h42.667c11.797,0,21.333,9.557,21.333,21.333 S289.131,405.333,277.333,405.333z M426.688,298.667h-21.355H106.667H85.333v-21.333h21.333h298.667h21.333L426.688,298.667z M213.333,149.333c0-11.776,9.536-21.333,21.333-21.333h42.667c11.797,0,21.333,9.557,21.333,21.333s-9.536,21.333-21.333,21.333 h-42.667C222.869,170.667,213.333,161.109,213.333,149.333z M405.333,64H106.667H85.333V42.667h341.333L426.688,64H405.333z" />
-        </svg>
-      )
+      icon: <Truck className="w-12 h-12" />,
+      color: "from-purple-500 to-purple-600"
     },
     {
       title: "Custom Builds",
@@ -60,39 +70,15 @@ export default function LandingPage() {
       items: [
         "Custom pallet building based on client specifications"
       ],
-      icon: (
-        <svg 
-          fill="currentColor" 
-          viewBox="0 -4.91 122.88 122.88" 
-          version="1.1" 
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-12 h-12"
-        >
-          <path fillRule="evenodd" clipRule="evenodd" d="M0,100.07h14.72V1.57c0-0.86,0.71-1.57,1.57-1.57h49.86c0.86,0,1.57,0.71,1.57,1.57V38.5h44.12 c0.86,0,1.57,0.71,1.57,1.57v59.99h9.47v12.99H0V100.07L0,100.07z M27.32,14.82h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36 c0,0.31-0.26,0.57-0.57,0.57h-10.2c-0.31,0-0.57-0.26-0.57-0.57V15.39C26.75,15.08,27.01,14.82,27.32,14.82L27.32,14.82z M44.6,76.3h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57H44.6c-0.31,0-0.57-0.26-0.57-0.57V76.87 C44.03,76.55,44.29,76.3,44.6,76.3L44.6,76.3z M27.32,76.3h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57 h-10.2c-0.31,0-0.57-0.26-0.57-0.57V76.87C26.75,76.55,27.01,76.3,27.32,76.3L27.32,76.3z M44.6,55.8h10.2 c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57H44.6c-0.31,0-0.57-0.26-0.57-0.57V56.38 C44.03,56.06,44.29,55.8,44.6,55.8L44.6,55.8z M27.32,55.8h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57 h-10.2c-0.31,0-0.57-0.26-0.57-0.57V56.38C26.75,56.06,27.01,55.8,27.32,55.8L27.32,55.8z M44.6,35.31h10.2 c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57H44.6c-0.31,0-0.57-0.26-0.57-0.57V35.88 C44.03,35.57,44.29,35.31,44.6,35.31L44.6,35.31z M27.32,35.31h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57 h-10.2c-0.31,0-0.57-0.26-0.57-0.57V35.88C26.75,35.57,27.01,35.31,27.32,35.31L27.32,35.31z M44.6,14.82h10.2 c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57H44.6c-0.31,0-0.57-0.26-0.57-0.57V15.39 C44.03,15.08,44.29,14.82,44.6,14.82L44.6,14.82z M23.17,7.32h35.92c0.62,0,1.13,0.61,1.13,1.35v85.87c0,0.74-0.51,1.35-1.13,1.35 H23.17c-0.62,0-1.13-0.61-1.13-1.35V8.67C22.04,7.93,22.55,7.32,23.17,7.32L23.17,7.32z M72.61,53.43h10.2 c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57h-10.2c-0.31,0-0.57-0.26-0.57-0.57V54 C72.04,53.69,72.3,53.43,72.61,53.43L72.61,53.43z M89.89,76.3h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57 h-10.2c-0.31,0-0.57-0.26-0.57-0.57V76.87C89.32,76.55,89.58,76.3,89.89,76.3L89.89,76.3z M72.61,76.3h10.2 c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57h-10.2c-0.31,0-0.57-0.26-0.57-0.57V76.87 C72.04,76.55,72.3,76.3,72.61,76.3L72.61,76.3z M89.89,53.43h10.2c0.31,0,0.57,0.26,0.57,0.57v12.36c0,0.31-0.26,0.57-0.57,0.57 h-10.2c-0.31,0-0.57-0.26-0.57-0.57V54C89.32,53.69,89.58,53.43,89.89,53.43L89.89,53.43z M68.86,45.82h35.92 c0.62,0,1.13,0.61,1.13,1.35v47.37c0,0.74-0.51,1.35-1.13,1.35H68.86c-0.62,0-1.13-0.61-1.13-1.35V47.17 C67.73,46.43,68.24,45.82,68.86,45.82L68.86,45.82z" />
-        </svg>
-      )
+      icon: <Package className="w-12 h-12" />,
+      color: "from-blue-500 to-blue-600"
     },
     {
       title: "Special Projects",
       description: "Handling complex logistics challenges",
       items: ["Re-works", "Co-packing", "Packaging", "Audits"],
-      icon: (
-        <svg 
-          fill="currentColor" 
-          version="1.1" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 500.001 500.001"
-          className="w-12 h-12"
-        >
-          <path d="M252.005,254.641L33.001,127.589c-1.232-0.716-2.756-0.72-4.004-0.004c-1.24,0.712-2.004,2.036-2.004,3.464v237.908 c0,1.424,0.756,2.744,1.992,3.46l219.004,127.044c0.62,0.36,1.316,0.54,2.008,0.54c0.688,0,1.38-0.18,1.996-0.536 c1.24-0.712,2.004-2.036,2.004-3.464v-237.9C253.997,256.677,253.241,255.357,252.005,254.641z M245.997,489.057L34.993,366.649 V137.993l211.004,122.412V489.057z" />
-          <path d="M471.001,127.581c-1.244-0.716-2.764-0.712-4.008,0.012L248.381,254.645c-1.904,1.108-2.556,3.556-1.444,5.468 c1.108,1.908,3.556,2.544,5.468,1.444l212.6-123.56v228.656l-216.7,125.892c-1.908,1.108-2.56,3.552-1.448,5.464 c0.74,1.28,2.08,1.992,3.46,1.992c0.684,0,1.376-0.176,2.004-0.54l218.692-127.048c1.236-0.712,1.992-2.032,1.992-3.456V131.049 C473.005,129.621,472.241,128.297,471.001,127.581z" />
-          <path d="M471.017,127.593L252.569,0.545c-1.24-0.724-2.768-0.728-4.016-0.004L28.989,127.589 c-1.908,1.104-2.564,3.548-1.456,5.464c1.1,1.908,3.544,2.564,5.464,1.456L250.553,8.625l216.44,125.88 c0.632,0.368,1.324,0.544,2.008,0.544c1.38,0,2.72-0.712,3.46-1.988C473.577,131.153,472.929,128.701,471.017,127.593z" />
-          <path d="M319.305,188.821L124.481,75.673c-1.904-1.108-4.356-0.464-5.464,1.448c-1.116,1.908-0.464,4.356,1.448,5.464 l194.824,113.148c0.632,0.368,1.32,0.544,2.004,0.544c1.38,0,2.72-0.712,3.46-1.992 C321.869,192.377,321.217,189.929,319.305,188.821z" />
-          <path d="M381.457,180.329l-218.02-126.62c-1.904-1.112-4.356-0.464-5.464,1.448c-1.116,1.908-0.464,4.356,1.448,5.464 l218.02,126.62c0.632,0.368,1.32,0.544,2.004,0.544c1.38,0,2.72-0.712,3.46-1.992 C384.021,183.885,383.369,181.437,381.457,180.329z" />
-          <path d="M339.945,203.069c-2.212,0-4,1.788-4,4v234.56c0,2.212,1.788,4,4,4c2.212,0,4-1.788,4-4v-234.56 C343.945,204.857,342.157,203.069,339.945,203.069z" />
-          <path d="M379.057,179.517c-2.212,0-4,1.788-4,4v215.092c0,2.212,1.788,4,4,4c2.208,0,4-1.788,4-4V183.517 C383.057,181.305,381.269,179.517,379.057,179.517z" />
-        </svg>
-      )
+      icon: <Settings className="w-12 h-12" />,
+      color: "from-green-500 to-green-600"
     },
     {
       title: "Yard Management",
@@ -103,17 +89,8 @@ export default function LandingPage() {
         "Yard checks",
         "YMS management"
       ],
-      icon: (
-        <svg 
-          fill="currentColor" 
-          viewBox="0 -30.87 122.88 122.88" 
-          version="1.1" 
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-12 h-12"
-        >
-          <path fillRule="evenodd" clipRule="evenodd" d="M105.01,40.54c-5.7,0-10.30,4.63-10.30,10.30c0,5.7,4.63,10.30,10.30,10.30c5.7,0,10.30-4.63,10.30-10.30 C115.31,45.14,110.68,40.54,105.01,40.54L105.01,40.54z M61.86,41.46c-5.2,0-9.38,4.22-9.38,9.38c0,5.2,4.22,9.38,9.38,9.38 c5.2,0,9.38-4.22,9.38-9.38C71.24,45.64,67.02,41.46,61.86,41.46L61.86,41.46z M61.86,47.23c-1.99,0-3.61,1.62-3.61,3.61 s1.62,3.61,3.61,3.61c1.99,0,3.61-1.62,3.61-3.61S63.85,47.23,61.86,47.23L61.86,47.23z M24.11,41.46c-5.2,0-9.38,4.22-9.38,9.38 c0,5.2,4.22,9.38,9.38,9.38c5.2,0,9.38-4.22,9.38-9.38C33.5,45.64,29.28,41.46,24.11,41.46L24.11,41.46z M24.11,47.23 c-1.99,0-3.61,1.62-3.61,3.61s1.62,3.61,3.61,3.61c1.99,0,3.61-1.62,3.61-3.61S26.11,47.23,24.11,47.23L24.11,47.23z M47.37,53.53 H38.1v-3.01h9.27V53.53L47.37,53.53z M10.46,53.53H5.63c-1.55,0-2.95-0.66-3.96-1.71c-1.01-1.05-1.65-2.50-1.65-4.02V8.06 c0-2.44-0.36-4.44,1.62-6.42C2.66,0.63,4.05,0,5.60,0h73.32c1.55,0,2.95,0.63,3.96,1.65c1.01,1.01,1.65,2.41,1.65,3.96l0,7.26 l10.27,0.07l3.62,0.02l0,0c0.73,0.79,1.40,1.60,2.01,2.42c2.71,3.64,4.23,7.94,4.52,12.11l16.38,6.27l1.55,16.51h-5.01 c-2.31-18.03-25.03-15.84-25.73,0l-7.61,0v1.74c0,0.86-0.67,1.52-1.52,1.52l-6.69,0v-3.04h5.16V5.61c0-0.70-0.28-1.33-0.76-1.81 c-0.48-0.48-1.11-0.76-1.81-0.76H5.60c-0.70,0-1.33,0.29-1.81,0.76C2.76,4.77,3.07,6.43,3.07,7.70v40.10c0,0.73,0.32,1.43,0.79,1.93 c0.48,0.48,1.08,0.79,1.77,0.79h4.82V53.53L10.46,53.53z M94.46,17.89l-5.83-0.09v9.69h11.02C99.12,23.98,97.49,20.90,94.46,17.89 L94.46,17.89z M105.01,46.88c-2.19,0-3.96,1.77-3.96,3.96c0,2.19,1.77,3.96,3.96,3.96c2.19,0,3.96-1.77,3.96-3.96 C108.97,48.65,107.20,46.88,105.01,46.88L105.01,46.88z" />
-        </svg>
-      )
+      icon: <Warehouse className="w-12 h-12" />,
+      color: "from-orange-500 to-orange-600"
     },
     {
       title: "Overflow Space",
@@ -122,29 +99,148 @@ export default function LandingPage() {
         "Solutions for overflow storage",
         "Receiving and shipping freight from TMH facilities"
       ],
-      icon: (
-        <svg 
-          fill="currentColor" 
-          version="1.1" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 512 512"
-          className="w-12 h-12"
-        >
-          <g>
-            <g>
-              <g>
-                <rect x="128" y="170.667" width="256" height="42.667"></rect>
-                <rect x="128" y="256" width="256" height="42.667"></rect>
-                <path d="M128,512h64V405.333c0-11.776,9.536-21.333,21.333-21.333h85.333c11.797,0,21.333,9.557,21.333,21.333V512h64V341.333 H128V512z"></path>
-                <path d="M490.667,0H21.333C9.536,0,0,9.557,0,21.333v469.333C0,502.443,9.536,512,21.333,512h64V149.333 c0-11.776,9.536-21.333,21.333-21.333h298.667c11.797,0,21.333,9.557,21.333,21.333V512h64c11.797,0,21.333-9.557,21.333-21.333 V21.333C512,9.557,502.464,0,490.667,0z"></path>
-                <rect x="234.667" y="426.667" width="42.667" height="85.333"></rect>
-              </g>
-            </g>
-          </g>
-        </svg>
-      )
+      icon: <Package className="w-12 h-12" />,
+      color: "from-red-500 to-red-600"
     }
   ];
+
+  const reasons = [
+    { 
+      title: 'Reliable Delivery', 
+      desc: 'Consistent SLAs and proactive communication across every engagement.',
+      icon: <Clock className="w-8 h-8" />,
+      color: "bg-blue-50 border-blue-200"
+    },
+    { 
+      title: 'Scalable Crews', 
+      desc: 'Rapidly deploy teams sized to your volume and timelines.',
+      icon: <Users className="w-8 h-8" />,
+      color: "bg-green-50 border-green-200"
+    },
+    { 
+      title: 'Safety First', 
+      desc: 'OSHA-aligned practices, training, and ongoing site audits.',
+      icon: <Shield className="w-8 h-8" />,
+      color: "bg-red-50 border-red-200"
+    },
+    { 
+      title: 'Transparent Pricing', 
+      desc: 'Clear estimates, milestone visibility, and no surprises.',
+      icon: <DollarSign className="w-8 h-8" />,
+      color: "bg-yellow-50 border-yellow-200"
+    },
+    { 
+      title: 'Nationwide Coverage', 
+      desc: 'Support where you need it through our partner network.',
+      icon: <MapPin className="w-8 h-8" />,
+      color: "bg-purple-50 border-purple-200"
+    },
+    { 
+      title: 'Tailored Solutions', 
+      desc: 'We adapt to your SOPs, WMS, and KPIs.',
+      icon: <Settings className="w-8 h-8" />,
+      color: "bg-indigo-50 border-indigo-200"
+    }
+  ];
+
+  const processSteps = [
+    { 
+      step: '1', 
+      title: 'Discovery', 
+      desc: 'Understand ops, constraints, and success metrics.',
+      icon: <Headphones className="w-8 h-8" />
+    },
+    { 
+      step: '2', 
+      title: 'Design', 
+      desc: 'Craft a right-sized, measurable logistics plan.',
+      icon: <Settings className="w-8 h-8" />
+    },
+    { 
+      step: '3', 
+      title: 'Execution', 
+      desc: 'Deploy crews, tech, and oversight with SLAs.',
+      icon: <Truck className="w-8 h-8" />
+    },
+    { 
+      step: '4', 
+      title: 'Optimize', 
+      desc: 'Continuously monitor and improve performance.',
+      icon: <TrendingUp className="w-8 h-8" />
+    }
+  ];
+
+  const testimonials = [
+    { 
+      quote: 'TMH scaled with us during peak season flawlessly. Their team handled our 3x volume increase without missing a beat. Professional, reliable, and exactly what we needed.',
+      name: 'Sarah Chen', 
+      role: 'Operations Director', 
+      company: 'National 3PL',
+      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
+      rating: 5
+    },
+    { 
+      quote: 'Professional teams and impeccable communication. They solved our yard management challenges and improved our efficiency by 40%. Highly recommend!',
+      name: 'Michael Rodriguez', 
+      role: 'Facility Manager', 
+      company: 'Food & Bev DC',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+      rating: 5
+    },
+    { 
+      quote: 'They solved our overflow and yard headaches fast. The custom pallet builds saved us thousands in shipping costs. TMH is our go-to logistics partner.',
+      name: 'Jennifer Thompson', 
+      role: 'Logistics Lead', 
+      company: 'Retail 3PL',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+      rating: 5
+    }
+  ];
+
+  const faqs = [
+    { q: 'Do you operate nationwide?', a: 'Yes. We operate across the U.S. through our partner network and onsite crews.' },
+    { q: 'Can you support short-term peak projects?', a: 'Absolutely. From day-rate teams to turnkey projects with tight SLAs.' },
+    { q: 'Are you insured and safety-compliant?', a: 'Yes. We carry comprehensive coverage and maintain strict safety programs.' }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { scale: 0.95, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.4
+      }
+    },
+    hover: {
+      scale: 1.02,
+      y: -5,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
 
 return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -274,6 +370,350 @@ return (
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Why Us Section - Enhanced */}
+      <section id="why-us" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white px-4 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-color)]/5 to-[var(--hover-yellow)]/5"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--primary-color)]/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[var(--hover-yellow)]/10 to-transparent rounded-full blur-3xl"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--primary-color)]">
+              Why Choose TMH
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We deliver exceptional value through proven expertise, scalable solutions, and unwavering commitment to your success.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {reasons.map((reason, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={itemVariants}
+                className="group relative"
+              >
+                <motion.div
+                  variants={cardVariants}
+                  whileHover="hover"
+                  className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 ${reason.color} group-hover:border-[var(--hover-yellow)] relative overflow-hidden`}
+                >
+                  {/* Icon background */}
+                  <div className={`absolute top-4 right-4 w-16 h-16 rounded-full ${reason.color.replace('bg-', 'bg-').replace('border-', 'bg-')} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
+                  
+                  {/* Icon */}
+                  <div className="text-[var(--primary-color)] mb-6 group-hover:text-[var(--hover-yellow)] transition-colors duration-300">
+                    {reason.icon}
+                  </div>
+                  
+                  <h3 className="text-xl font-bold mb-4 text-[var(--primary-color)] group-hover:text-[var(--hover-yellow)] transition-colors duration-300">
+                    {reason.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {reason.desc}
+                  </p>
+                  
+                  {/* Hover effect line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[var(--primary-color)] to-[var(--hover-yellow)] group-hover:w-full transition-all duration-500"></div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Process Section - Enhanced */}
+      <section id="process" className="py-16 md:py-24 bg-white px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--primary-color)]">
+              How We Work
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our proven 4-step process ensures seamless execution and measurable results for every project.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-4 gap-8 relative"
+          >
+            {/* Connection line */}
+            <div className="hidden md:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-[var(--primary-color)] to-[var(--hover-yellow)] z-0"></div>
+            
+            {processSteps.map((step, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={itemVariants}
+                className="relative text-center"
+              >
+                <motion.div
+                  variants={cardVariants}
+                  whileHover="hover"
+                  className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 hover:border-[var(--hover-yellow)] relative group z-10"
+                >
+                  {/* Step number with gradient background */}
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-[var(--primary-color)] to-[var(--hover-yellow)] text-white flex items-center justify-center font-bold text-xl md:text-2xl mb-6 mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {step.step}
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className="text-[var(--primary-color)] mb-4 group-hover:text-[var(--hover-yellow)] transition-colors duration-300">
+                    {step.icon}
+                  </div>
+                  
+                  <h3 className="text-xl font-bold mb-4 text-[var(--primary-color)] group-hover:text-[var(--hover-yellow)] transition-colors duration-300">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials Section - Enhanced */}
+      <section id="testimonials" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white px-4 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-color)]/5 to-[var(--hover-yellow)]/5"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--primary-color)]">
+              What Our Partners Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Real feedback from logistics professionals who trust TMH with their operations.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-8"
+          >
+            {testimonials.map((t, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={itemVariants}
+                className="group h-full"
+              >
+                <motion.div
+                  variants={cardVariants}
+                  whileHover="hover"
+                  className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 hover:border-[var(--hover-yellow)] relative overflow-hidden h-full flex flex-col"
+                >
+                  {/* Quote decoration */}
+                  <div className="absolute top-4 right-4 text-6xl text-[var(--hover-yellow)] opacity-20 group-hover:opacity-30 transition-opacity duration-300">"</div>
+                  
+                  {/* Rating stars */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-[var(--hover-yellow)] text-[var(--hover-yellow)]" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-gray-700 leading-relaxed mb-6 relative z-10">
+                    {t.quote}
+                  </p>
+                  
+                  {/* Author info */}
+                  <div className="flex items-center gap-4">
+                    <img 
+                      src={t.image} 
+                      alt={t.name} 
+                      className="w-12 h-12 rounded-full object-cover border-2 border-[var(--primary-color)]"
+                    />
+                    <div>
+                      <div className="font-semibold text-[var(--primary-color)]">{t.name}</div>
+                      <div className="text-sm text-gray-500">{t.role}</div>
+                      <div className="text-sm text-[var(--hover-yellow)] font-medium">{t.company}</div>
+                    </div>
+                  </div>
+                  
+                  {/* Hover effect line */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[var(--primary-color)] to-[var(--hover-yellow)] group-hover:w-full transition-all duration-500"></div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Section - Enhanced */}
+      <section id="faq" className="py-16 md:py-24 bg-white px-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--primary-color)]">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get answers to common questions about our services and operations.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            {faqs.map((f, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={itemVariants}
+                className="group"
+              >
+                <motion.div
+                  variants={cardVariants}
+                  whileHover="hover"
+                  className="border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-[var(--hover-yellow)] transition-all duration-300 shadow-sm hover:shadow-lg"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                    className="w-full flex items-center justify-between text-left px-6 py-6 bg-gradient-to-r from-gray-50 to-white hover:from-gray-100 hover:to-gray-50 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[var(--primary-color)]/5 group-hover:to-[var(--hover-yellow)]/5"
+                  >
+                    <span className="font-semibold text-lg text-[var(--primary-color)] group-hover:text-[var(--hover-yellow)] transition-colors duration-300">
+                      {f.q}
+                    </span>
+                    <motion.svg 
+                      className="w-6 h-6 text-[var(--primary-color)] group-hover:text-[var(--hover-yellow)] transition-colors duration-300" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      animate={{ rotate: openFaqIndex === idx ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </motion.svg>
+                  </button>
+                  <motion.div
+                    initial={false}
+                    animate={{ 
+                      height: openFaqIndex === idx ? 'auto' : 0,
+                      opacity: openFaqIndex === idx ? 1 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 py-6 text-gray-700 bg-white border-t border-gray-100">
+                      {f.a}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section - Enhanced */}
+      <section id="cta" className="py-20 md:py-24 bg-gradient-to-br from-[var(--primary-color)] to-[var(--primary-color)]/90 text-white text-center px-4 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-color)] to-[var(--hover-yellow)]/20"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--hover-yellow)]/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[var(--hover-yellow)]/20 to-transparent rounded-full blur-3xl"></div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto relative z-10"
+        >
+          <h3 className="text-3xl md:text-5xl font-bold mb-6">
+            Ready to streamline your operations?
+          </h3>
+          <p className="mt-4 md:mt-6 text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Let's build a plan that hits your KPIs and transforms your logistics efficiency.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => handleScroll(e, '#contact')} 
+              className="btn-secondary px-10 py-4 text-lg font-semibold group relative overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Get a Quote
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--hover-yellow)] to-[var(--hover-yellow)]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.button>
+            
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => handleScroll(e, '#services')} 
+              className="px-10 py-4 text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-[var(--primary-color)] transition-all duration-300 rounded-full group relative overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Learn More
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+            </motion.button>
+          </div>
+          
+          {/* Trust indicators */}
+          <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-gray-300">
+            <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-[var(--hover-yellow)]" />
+              <span>OSHA Compliant</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-[var(--hover-yellow)]" />
+              <span>Certified Teams</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-[var(--hover-yellow)]" />
+              <span>Nationwide Coverage</span>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Services Section */}

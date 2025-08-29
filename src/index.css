@@ -1,15 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
- @layer base {
+@layer base {
   :root {
     --primary-color: #3f2f4a;
     --hover-yellow: #eacd89;
     --white: white;
     --hover-blue: #6c507e;
     --black: black;
-  } */
+  }
 
   html {
     font-family: 'Inter', system-ui, sans-serif;
@@ -37,9 +36,9 @@
   }
   
   .btn-secondary {
-    background-color: white;
-    color: #0056d2;
-    border: 2px solid #0056d2;
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     padding: 0.75rem 1.5rem;
     border-radius: 9999px;
     font-weight: 500;
@@ -47,6 +46,7 @@
   }
   
   .btn-secondary:hover {
+    color: var(--hover-yellow);
     background-color: #f9fafb;
   }
   
