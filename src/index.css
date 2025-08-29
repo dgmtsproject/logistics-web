@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+ @layer base {
+  :root {
+    --primary-color: #3f2f4a;
+    --hover-yellow: #eacd89;
+    --white: white;
+    --hover-blue: #6c507e;
+    --black: black;
+  } */
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  
+  .btn-primary:hover {
+    color: var(--hover-yellow);
+  }
+  
+  .btn-secondary {
+    background-color: white;
+    color: #0056d2;
+    border: 2px solid #0056d2;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #f9fafb;
+  }
+  
+  .section-padding {
+    padding: 4rem 1.5rem;
+  }
+  
+  .container-width {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  /* Navbar and link styles using CSS variables */
+  .navbar {
+    background-color: var(--primary-color);
+  }
+  .nav-link {
+    color: var(--white);
+    transition: color 0.3s ease-in-out;
+  }
+  .nav-link:hover {
+    color: var(--hover-yellow);
+  }
+}
