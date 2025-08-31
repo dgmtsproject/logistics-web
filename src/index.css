@@ -70,4 +70,28 @@
   .nav-link:hover {
     color: var(--hover-yellow);
   }
+
+  /* Hero Slider Styles */
+  .hero-slider {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-slider img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Smooth transitions for slider elements */
+  .slider-nav-button {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Mobile touch improvements */
+  @media (max-width: 768px) {
+    .hero-slider {
+      touch-action: pan-y;
+    }
+  }
 }

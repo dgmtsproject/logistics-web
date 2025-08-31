@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   CheckCircle, 
   Users, 
@@ -15,7 +15,9 @@ import {
   Clock,
   TrendingUp,
   Headphones,
-  Send
+  Send,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -29,6 +31,10 @@ export default function LandingPage() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  
+  // Hero slider state
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -51,6 +57,91 @@ export default function LandingPage() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
+  };
+
+  // Hero slider data
+  const heroSlides = [
+    {
+      id: 1,
+      image: "/assets/hero.jpeg",
+      title: "Your Trusted 4PL Partner For Comprehensive Logistics Solutions",
+      subtitle: "Supporting 3PL Operations With Exceptional Services",
+      overlay: "bg-black/50"
+    },
+    {
+      id: 2,
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&h=1080&fit=crop&crop=center",
+      title: "Professional Warehouse Management Solutions",
+      subtitle: "Streamline your operations with our expert logistics services",
+      overlay: "bg-[var(--primary-color)]/60"
+    },
+    {
+      id: 3,
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&h=1080&fit=crop&crop=center",
+      title: "Advanced Distribution Center Operations",
+      subtitle: "Optimize your supply chain with cutting-edge technology",
+      overlay: "bg-[var(--primary-color)]/50"
+    },
+    {
+      id: 4,
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&h=1080&fit=crop&crop=center",
+      title: "Efficient Transportation & Logistics",
+      subtitle: "Delivering excellence in every shipment and delivery",
+      overlay: "bg-black/40"
+    }
+  ];
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, heroSlides.length]);
+
+  // Navigation functions
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  // Touch support for mobile
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
   };
 
   const services = [
@@ -418,19 +509,130 @@ return (
          </motion.div>
        </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="relative bg-cover bg-center bg-no-repeat text-white py-24 md:py-32 text-center px-4" style={{backgroundImage: 'url(/assets/hero.jpeg)'}}>
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative max-w-7xl mx-auto px-4">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            Your Trusted 4PL Partner For Comprehensive Logistics Solutions
-          </h1>
-          <p className="text-xl md:text-2xl mb-10 text-white max-w-4xl mx-auto leading-relaxed">
-            Supporting 3PL Operations With Exceptional Services
-          </p>
-          <button onClick={(e) => handleScroll(e, '#contact')} className="btn-primary text-lg px-8 py-3 rounded-lg">
-            Contact Us
-          </button>
+      {/* Hero Slider Section */}
+      <section id="home" className="relative h-screen overflow-hidden hero-slider">
+        {/* Slider Container */}
+        <div 
+          className="relative w-full h-full"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={currentSlide}
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full"
+            >
+              {/* Background Image */}
+              <div 
+                className="w-full h-full bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${heroSlides[currentSlide].image})` }}
+              />
+              
+              {/* Overlay */}
+              <div className={`absolute inset-0 ${heroSlides[currentSlide].overlay}`} />
+              
+              {/* Content */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="max-w-7xl mx-auto px-4 text-center text-white">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                      {heroSlides[currentSlide].title}
+                    </h1>
+                    <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-4xl mx-auto leading-relaxed">
+                      {heroSlides[currentSlide].subtitle}
+                    </p>
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => handleScroll(e, '#contact')} 
+                      className="bg-[var(--hover-yellow)] hover:bg-[var(--hover-yellow)]/90 text-[var(--primary-color)] text-lg px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                    >
+                      Contact Us
+                    </motion.button>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation Arrows - Hidden on mobile for touch support */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={prevSlide}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          className="hidden md:block absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 slider-nav-button text-white p-3 rounded-full transition-all duration-300 z-10"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </motion.button>
+
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={nextSlide}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          className="hidden md:block absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 slider-nav-button text-white p-3 rounded-full transition-all duration-300 z-10"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </motion.button>
+
+        {/* Dots Navigation */}
+        <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-3 z-10">
+          {heroSlides.map((_, index) => (
+            <motion.button
+              key={index}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.8 }}
+              onClick={() => goToSlide(index)}
+              onMouseEnter={() => setIsAutoPlaying(false)}
+              onMouseLeave={() => setIsAutoPlaying(true)}
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide 
+                  ? 'bg-[var(--hover-yellow)] scale-125' 
+                  : 'bg-white/50 hover:bg-white/70'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Mobile Swipe Indicator */}
+        <div className="md:hidden absolute bottom-16 left-1/2 transform -translate-x-1/2 text-white/70 text-sm z-10">
+          <motion.div
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex items-center gap-2"
+          >
+            <span>Swipe to navigate</span>
+            <motion.div
+              animate={{ x: [0, 10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
+          <motion.div
+            className="h-full bg-[var(--hover-yellow)]"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 5, ease: "linear" }}
+            key={currentSlide}
+          />
         </div>
       </section>
 
