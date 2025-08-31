@@ -58,27 +58,51 @@ export default function LandingPage() {
       title: "Lumping Services",
       description: "Professional freight handling and palletizing",
       items: [
+        "Floor unload freight and palletize",
         "Unloading and palletizing floor-loaded freight",
         "Floor loading freight into shipping containers"
       ],
-      icon: <Truck className="w-12 h-12" />,
-      color: "from-purple-500 to-purple-600"
+      image: "/assets/lumping-services.png"
+    },
+    {
+      title: "Order Filling",
+      description: "Comprehensive picking solutions for all your needs",
+      items: [
+        "Pallet pick",
+        "Case pick", 
+        "Unit pick",
+        "We do it all with accuracy and efficiency"
+      ],
+      image: "/assets/Order-Filling.png"
     },
     {
       title: "Custom Builds",
       description: "Tailored solutions for your specific needs",
       items: [
+        "Build customized display pallets",
         "Custom pallet building based on client specifications"
       ],
-      icon: <Package className="w-12 h-12" />,
-      color: "from-blue-500 to-blue-600"
+      image: "/assets/Custom-Builds.png"
     },
     {
-      title: "Special Projects",
-      description: "Handling complex logistics challenges",
-      items: ["Re-works", "Co-packing", "Packaging", "Audits"],
-      icon: <Settings className="w-12 h-12" />,
-      color: "from-green-500 to-green-600"
+      title: "VAS Projects",
+      description: "Value-added services to enhance your operations",
+      items: [
+        "Co-packing",
+        "Re-works", 
+        "Packaging",
+        "QA Audits"
+      ],
+      image: "/assets/VAS-Projects.jpg"
+    },
+    {
+      title: "Reverse Logistics",
+      description: "Efficient returns processing and management",
+      items: [
+        "Returns Processing",
+        "Re-packaging"
+      ],
+      image: "/assets/Reverse-Logistics.png"
     },
     {
       title: "Yard Management",
@@ -89,18 +113,29 @@ export default function LandingPage() {
         "Yard checks",
         "YMS management"
       ],
-      icon: <Warehouse className="w-12 h-12" />,
-      color: "from-orange-500 to-orange-600"
+      image: "/assets/Yard-management.png"
     },
     {
-      title: "Overflow Space",
+      title: "Distribution Center Set-up",
+      description: "Let us set your DC up for safety, accuracy and efficiency",
+      items: [
+        "Lay-out",
+        "Striping",
+        "Aisle and location signage"
+      ],
+      image: "/assets/distribution-center-set-up-1.png",
+      image2: "/assets/distribution-center-set-up-2.png"
+    },
+    {
+      title: "Overflow Warehouse Management",
       description: "Flexible storage solutions when you need them",
       items: [
         "Solutions for overflow storage",
-        "Receiving and shipping freight from TMH facilities"
+        "Inventory Management",
+        "Forecast",
+        "Advanced Inventory Analysis"
       ],
-      icon: <Package className="w-12 h-12" />,
-      color: "from-red-500 to-red-600"
+      image: "/assets/overflow-warehouse-management.png"
     }
   ];
 
@@ -244,89 +279,144 @@ export default function LandingPage() {
 
 return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Navigation - Keeping original style exactly */}
-      <nav className="navbar shadow-sm sticky top-0 z-50 w-full">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <div className="flex-shrink-0 ml-12">
-              <img 
-                src="/assets/TMH Logistics Original Logo Cropped No Subtitle-p-500.jpg" 
-                alt="TMH Logistics" 
-                className="h-20 w-auto"
-              />
-            </div>
-            
-            {/* Navigation Links */}
-            <ul className="hidden md:flex space-x-8 mr-40">
-              <li>
-                <a 
-                onClick={(e)=>handleScroll(e,'#home')}
-                
-                href="#home" className="nav-link px-2 py-1 font-light uppercase tracking-wide text-sm">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a 
-                onClick={(e)=>handleScroll(e,'#about')}
-                href="#about" className="nav-link px-2 py-1 font-light uppercase tracking-wide text-sm">
-                  About
-                </a>
-              </li>
-              <li>
-                <a 
-                onClick={(e)=>handleScroll(e,'#services')}
-                href="#services" className="nav-link px-2 py-1 font-light uppercase tracking-wide text-sm">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a 
-                onClick={(e)=>handleScroll(e,'#contact')}
-                href="#contact" className="nav-link px-2 py-1 font-light uppercase tracking-wide text-sm">
-                  Contact
-                </a>
-              </li>
-            </ul>
-            
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-              </svg>
-            </button>
+                   {/* Enhanced Navigation with Primary Background */}
+       <nav className="bg-[var(--primary-color)] shadow-lg sticky top-0 z-50 w-full border-b border-[var(--primary-color)]/20">
+         <div className="max-w-7xl mx-auto px-6">
+           <div className="flex items-center justify-between h-20">
+             {/* Logo */}
+             <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6 }}
+               className="flex-shrink-0"
+             >
+               <img 
+                 src="/assets/TMH Logistics Original Logo Cropped No Subtitle-p-500.jpg" 
+                 alt="TMH Logistics" 
+                 className="h-16 w-auto hover:scale-105 transition-transform duration-300"
+               />
+             </motion.div>
+             
+             {/* Navigation Links */}
+             <motion.ul 
+               initial={{ opacity: 0, y: -20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6, delay: 0.2 }}
+               className="hidden md:flex space-x-1"
+             >
+               {[
+                 { href: '#home', label: 'Home' },
+                 { href: '#about', label: 'About' },
+                 { href: '#services', label: 'Services' },
+                 { href: '#contact', label: 'Contact' }
+               ].map((item, idx) => (
+                 <motion.li 
+                   key={idx}
+                   whileHover={{ y: -2 }}
+                   className="relative group"
+                 >
+                   <a 
+                     onClick={(e) => handleScroll(e, item.href)}
+                     href={item.href} 
+                     className="relative px-4 py-2 font-medium text-white hover:text-[var(--hover-yellow)] transition-all duration-300 uppercase tracking-wide text-sm group-hover:scale-105"
+                   >
+                     {item.label}
+                     {/* Animated underline */}
+                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-[var(--hover-yellow)] group-hover:w-full transition-all duration-300 rounded-full"></span>
+                   </a>
+                 </motion.li>
+               ))}
+             </motion.ul>
+             
+             {/* CTA Button */}
+             <motion.div
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6, delay: 0.4 }}
+               className="hidden md:block"
+             >
+               <motion.button
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
+                 onClick={(e) => handleScroll(e, '#contact')}
+                 className="px-6 py-2.5 bg-[var(--hover-yellow)] hover:bg-[var(--hover-yellow)]/90 text-[var(--primary-color)] font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+               >
+                 Get Quote
+               </motion.button>
+             </motion.div>
+             
+             {/* Mobile Menu Button */}
+             <motion.button 
+               whileTap={{ scale: 0.95 }}
+               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+               className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
+             >
+               <div className="w-6 h-6 relative">
+                 <motion.span
+                   animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                   className="absolute w-6 h-0.5 bg-white rounded-full transition-all duration-300"
+                 />
+                 <motion.span
+                   animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                   className="absolute w-6 h-0.5 bg-white rounded-full top-2 transition-all duration-300"
+                 />
+                 <motion.span
+                   animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                   className="absolute w-6 h-0.5 bg-white rounded-full top-4 transition-all duration-300"
+                 />
+               </div>
+             </motion.button>
+           </div>
+         </div>
 
-            {/* Mobile Menu */}
-            <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-              <ul className="py-4">
-                <li>
-                  <a onClick={(e) => handleScroll(e, '#home')} href="#home" className="block px-6 py-3 text-[var(--primary-color)] hover:text-[var(--hover-yellow)] font-light uppercase tracking-wide text-sm transition-colors">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a onClick={(e) => handleScroll(e, '#about')} href="#about" className="block px-6 py-3 text-[var(--primary-color)] hover:text-[var(--hover-yellow)] font-light uppercase tracking-wide text-sm transition-colors">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a onClick={(e) => handleScroll(e, '#services')} href="#services" className="block px-6 py-3 text-[var(--primary-color)] hover:text-[var(--hover-yellow)] font-light uppercase tracking-wide text-sm transition-colors">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a onClick={(e) => handleScroll(e, '#contact')} href="#contact" className="block px-6 py-3 text-[var(--primary-color)] hover:text-[var(--hover-yellow)] font-light uppercase tracking-wide text-sm transition-colors">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
+         {/* Enhanced Mobile Menu */}
+         <motion.div 
+           initial={false}
+           animate={{ 
+             height: isMobileMenuOpen ? 'auto' : 0,
+             opacity: isMobileMenuOpen ? 1 : 0
+           }}
+           transition={{ duration: 0.3, ease: "easeInOut" }}
+           className="md:hidden overflow-hidden bg-[var(--primary-color)] border-t border-white/20"
+         >
+           <div className="px-6 py-4 space-y-2">
+             {[
+               { href: '#home', label: 'Home', icon: '🏠' },
+               { href: '#about', label: 'About', icon: 'ℹ️' },
+               { href: '#services', label: 'Services', icon: '🔧' },
+               { href: '#contact', label: 'Contact', icon: '📞' }
+             ].map((item, idx) => (
+               <motion.a
+                 key={idx}
+                 initial={{ opacity: 0, x: -20 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 transition={{ duration: 0.3, delay: idx * 0.1 }}
+                 onClick={(e) => handleScroll(e, item.href)}
+                 href={item.href}
+                 className="flex items-center gap-3 px-4 py-3 text-white hover:text-[var(--hover-yellow)] hover:bg-white/10 rounded-lg transition-all duration-200 font-medium"
+               >
+                 <span className="text-lg">{item.icon}</span>
+                 <span className="uppercase tracking-wide text-sm">{item.label}</span>
+               </motion.a>
+             ))}
+             
+             {/* Mobile CTA Button */}
+             <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.3, delay: 0.4 }}
+               className="pt-4"
+             >
+               <button
+                 onClick={(e) => handleScroll(e, '#contact')}
+                 className="w-full px-6 py-3 bg-[var(--hover-yellow)] hover:bg-[var(--hover-yellow)]/90 text-[var(--primary-color)] font-semibold rounded-lg transition-all duration-300 shadow-md"
+               >
+                 Get Quote
+               </button>
+             </motion.div>
+           </div>
+         </motion.div>
+       </nav>
 
       {/* Hero Section */}
       <section id="home" className="relative bg-cover bg-center bg-no-repeat text-white py-24 md:py-32 text-center px-4" style={{backgroundImage: 'url(/assets/hero.jpeg)'}}>
@@ -716,28 +806,135 @@ return (
         </motion.div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-16 md:py-24 bg-white px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-16 text-[var(--primary-color)]">
-            Our Services
-          </h2>
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {/* Services Section - Redesigned */}
+      <section id="services" className="py-16 md:py-24 bg-white px-4 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-color)]/3 to-[var(--hover-yellow)]/3"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--primary-color)]/8 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[var(--hover-yellow)]/8 to-transparent rounded-full blur-3xl"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--primary-color)]">
+              Our Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive logistics solutions designed to streamline your operations and drive efficiency.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-16"
+          >
             {services.map((service, idx) => (
-              <div key={idx} className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
-                <div className="text-4xl mb-4 text-[var(--primary-color)]">{service.icon}</div>
-                <h3 className="text-xl font-semibold mb-3 text-[var(--primary-color)]">{service.title}</h3>
-                <ul className="space-y-2 mt-2 flex-grow">
-                  {service.items.map((item, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="text-[var(--primary-color)] mr-2 mt-1.5">•</span>
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <motion.div 
+                key={idx}
+                variants={itemVariants}
+                className={`group relative ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              >
+                                 <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+                   {/* Image Section */}
+                   <div className="w-full md:w-1/2 relative order-1">
+                     <motion.div
+                       whileHover={{ scale: 1.02 }}
+                       transition={{ duration: 0.3 }}
+                       className="relative overflow-hidden rounded-2xl shadow-2xl"
+                     >
+                       {service.image2 ? (
+                         <div className="grid grid-cols-2 gap-2">
+                           <img 
+                             src={service.image} 
+                             alt={service.title} 
+                             className="w-full h-64 md:h-80 object-cover rounded-l-2xl group-hover:scale-105 transition-transform duration-500"
+                           />
+                           <img 
+                             src={service.image2} 
+                             alt={service.title} 
+                             className="w-full h-64 md:h-80 object-cover rounded-r-2xl group-hover:scale-105 transition-transform duration-500"
+                           />
+                         </div>
+                       ) : (
+                         <img 
+                           src={service.image} 
+                           alt={service.title} 
+                           className="w-full h-64 md:h-80 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                         />
+                       )}
+                       
+                       {/* Brand color overlay on hover */}
+                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary-color)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                     </motion.div>
+                   </div>
+                   
+                   {/* Content Section */}
+                   <div className="w-full md:w-1/2 space-y-6 order-2">
+                     <motion.div
+                       initial={{ opacity: 0, x: idx % 2 === 0 ? 30 : -30 }}
+                       whileInView={{ opacity: 1, x: 0 }}
+                       transition={{ duration: 0.6, delay: 0.2 }}
+                       viewport={{ once: true }}
+                     >
+                       <div className="relative">
+                         <h3 className="text-3xl md:text-4xl font-bold text-[var(--primary-color)] mb-4 group-hover:text-[var(--hover-yellow)] transition-colors duration-300">
+                           {service.title}
+                         </h3>
+                         {/* Animated underline */}
+                         <div className="w-0 h-1 bg-gradient-to-r from-[var(--primary-color)] to-[var(--hover-yellow)] group-hover:w-full transition-all duration-700 ease-out rounded-full"></div>
+                       </div>
+                       
+                       <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                         {service.description}
+                       </p>
+                       
+                       {/* Service items with custom styling */}
+                       <div className="space-y-3">
+                         {service.items.map((item, i) => (
+                           <motion.div
+                             key={i}
+                             initial={{ opacity: 0, x: idx % 2 === 0 ? 20 : -20 }}
+                             whileInView={{ opacity: 1, x: 0 }}
+                             transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                             viewport={{ once: true }}
+                             className="flex items-start group/item"
+                           >
+                             <div className="flex-shrink-0 w-2 h-2 bg-[var(--hover-yellow)] rounded-full mt-3 mr-4 group-hover/item:scale-150 transition-transform duration-300"></div>
+                             <span className="text-gray-700 text-base group-hover/item:text-gray-900 transition-colors duration-300">
+                               {item}
+                             </span>
+                           </motion.div>
+                         ))}
+                       </div>
+                       
+                       {/* Call to action button */}
+                       <motion.button
+                         whileHover={{ scale: 1.05 }}
+                         whileTap={{ scale: 0.95 }}
+                         onClick={(e) => handleScroll(e, '#contact')}
+                         className="mt-8 px-8 py-3 bg-gradient-to-r from-[var(--primary-color)] to-[var(--primary-color)] hover:from-[var(--hover-yellow)] hover:to-[var(--hover-yellow)] text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                       >
+                         Learn More
+                       </motion.button>
+                     </motion.div>
+                   </div>
+                 </div>
+                
+                {/* Connecting line between services */}
+                {idx < services.length - 1 && (
+                  <div className="hidden md:block absolute left-1/2 top-full w-px h-16 bg-gradient-to-b from-[var(--primary-color)] to-[var(--hover-yellow)] transform -translate-x-1/2"></div>
+                )}
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
