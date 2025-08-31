@@ -193,7 +193,7 @@ export default function LandingPage() {
         "Returns Processing",
         "Re-packaging"
       ],
-      image: "/assets/Reverse-Logistics.png"
+      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=600&fit=crop&crop=center"
     },
     {
       title: "Yard Management",
@@ -204,7 +204,7 @@ export default function LandingPage() {
         "Yard checks",
         "YMS management"
       ],
-      image: "/assets/Yard-management.png"
+      image: "https://images.unsplash.com/photo-1741527694859-925f4a4ec88e?w=800&h=600&fit=crop&crop=center"
     },
     {
       title: "Distribution Center Set-up",
@@ -214,8 +214,8 @@ export default function LandingPage() {
         "Striping",
         "Aisle and location signage"
       ],
-      image: "/assets/distribution-center-set-up-1.png",
-      image2: "/assets/distribution-center-set-up-2.png"
+      image: "https://images.unsplash.com/photo-1627915589334-14a3c3e3a741?w=800&h=600&fit=crop&crop=center",
+      image2: "https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=800&h=600&fit=crop&crop=center"
     },
     {
       title: "Overflow Warehouse Management",
@@ -226,7 +226,7 @@ export default function LandingPage() {
         "Forecast",
         "Advanced Inventory Analysis"
       ],
-      image: "/assets/overflow-warehouse-management.png"
+      image: "https://images.unsplash.com/photo-1532635042-a6f6ad4745f9?w=800&h=600&fit=crop&crop=center"
     }
   ];
 
