@@ -184,7 +184,8 @@ export default function LandingPage() {
         "Packaging",
         "QA Audits"
       ],
-      image: "/assets/VAS-Projects.jpg"
+      image: "/assets/VAS-Projects.jpg",
+      image2:"/assets/uniform_img_1.png"
     },
     {
       title: "Reverse Logistics",
@@ -193,7 +194,8 @@ export default function LandingPage() {
         "Returns Processing",
         "Re-packaging"
       ],
-      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=600&fit=crop&crop=center"
+      image: "/assets/uniform_img_2.png",
+      image2: "/assets/uniform_img_3.png"
     },
     {
       title: "Yard Management",
@@ -204,18 +206,21 @@ export default function LandingPage() {
         "Yard checks",
         "YMS management"
       ],
-      image: "https://images.unsplash.com/photo-1741527694859-925f4a4ec88e?w=800&h=600&fit=crop&crop=center"
+      image: "/assets/uniform_img_4.png",
+      image2: "/assets/uniform_img_5.png"
     },
     {
-      title: "Distribution Center Set-up",
+      title: "Warehouse Solutions Design",
       description: "Let us set your DC up for safety, accuracy and efficiency",
       items: [
         "Lay-out",
         "Striping",
         "Aisle and location signage"
       ],
-      image: "https://images.unsplash.com/photo-1627915589334-14a3c3e3a741?w=800&h=600&fit=crop&crop=center",
-      image2: "https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=800&h=600&fit=crop&crop=center"
+      image: "/assets/uniform_img_6.png",
+      image2: "/assets/uniform_img_7.png",
+      image3: "/assets/uniform_img_8.png",
+      image4: "/assets/uniform_img_9.png"
     },
     {
       title: "Overflow Warehouse Management",
@@ -226,7 +231,8 @@ export default function LandingPage() {
         "Forecast",
         "Advanced Inventory Analysis"
       ],
-      image: "https://images.unsplash.com/photo-1532635042-a6f6ad4745f9?w=800&h=600&fit=crop&crop=center"
+      image2: "assets/uniform_img_10.png",
+      image: "assets/uniform_img_11.png"
     }
   ];
 
@@ -1052,17 +1058,40 @@ return (
                        transition={{ duration: 0.3 }}
                        className="relative overflow-hidden rounded-2xl shadow-2xl"
                      >
-                       {service.image2 ? (
-                         <div className="grid grid-cols-2 gap-2">
+                       {service.image4 ? (
+                         <div className="grid grid-cols-2 gap-2 h-[40rem] md:h-[44rem]">
                            <img 
                              src={service.image} 
                              alt={service.title} 
-                             className="w-full h-64 md:h-80 object-cover rounded-l-2xl group-hover:scale-105 transition-transform duration-500"
+                             className="w-full h-full object-cover rounded-tl-2xl group-hover:scale-105 transition-transform duration-500"
                            />
                            <img 
                              src={service.image2} 
                              alt={service.title} 
-                             className="w-full h-64 md:h-80 object-cover rounded-r-2xl group-hover:scale-105 transition-transform duration-500"
+                             className="w-full h-full object-cover rounded-tr-2xl group-hover:scale-105 transition-transform duration-500"
+                           />
+                           <img 
+                             src={service.image3} 
+                             alt={service.title} 
+                             className="w-full h-full object-cover rounded-bl-2xl group-hover:scale-105 transition-transform duration-500"
+                           />
+                           <img 
+                             src={service.image4} 
+                             alt={service.title} 
+                             className="w-full h-full object-cover rounded-br-2xl group-hover:scale-105 transition-transform duration-500"
+                           />
+                         </div>
+                       ) : service.image2 ? (
+                         <div className="space-y-2">
+                           <img 
+                             src={service.image} 
+                             alt={service.title} 
+                             className="w-full h-64 md:h-80 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500"
+                           />
+                           <img 
+                             src={service.image2} 
+                             alt={service.title} 
+                             className="w-full h-64 md:h-80 object-cover rounded-b-2xl group-hover:scale-105 transition-transform duration-500"
                            />
                          </div>
                        ) : (
@@ -1234,11 +1263,11 @@ return (
             className="h-32 w-auto mb-6"
           />
           <div className="flex flex-col items-center gap-4 text-lg mb-8">
-            <a href="tel:(770)-215-7606" className="flex items-center gap-3 hover:text-[var(--hover-yellow)] transition-colors duration-300">
+            <a href="tel:(404)-721-7429" className="flex items-center gap-3 hover:text-[var(--hover-yellow)] transition-colors duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <span>(770)-215-7606</span>
+              <span>404 721 7429</span>
             </a>
             <a href="mailto:info@tmhlogistics.com" className="flex items-center gap-3 hover:text-[var(--hover-yellow)] transition-colors duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
