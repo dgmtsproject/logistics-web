@@ -61,7 +61,14 @@ export default function LandingPage() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      let result;
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        console.error('JSON parse error:', jsonError);
+        console.error('Response text:', await response.text());
+        throw new Error('Server returned invalid response');
+      }
       
       if (response.ok) {
         console.log('Email sent successfully:', result);
