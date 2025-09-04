@@ -12,7 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
-
+TMH_Logistics_Website_Enhancement_Proposal.md
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

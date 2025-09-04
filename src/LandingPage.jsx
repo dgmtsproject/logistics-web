@@ -30,6 +30,8 @@ export default function LandingPage() {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   
   // Hero slider state
@@ -43,11 +45,45 @@ export default function LandingPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      console.log('Submitting form data:', formData);
+      
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        console.log('Email sent successfully:', result);
+        setIsSubmitted(true);
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          message: ''
+        });
+      } else {
+        console.error('Error sending email:', result);
+        setSubmitError(result.error || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleScroll = (e, target) => {
@@ -1178,6 +1214,18 @@ return (
           
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl mx-auto">
+              {/* Error Message */}
+              {submitError && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    {submitError}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <input
                   type="text"
@@ -1186,7 +1234,8 @@ return (
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -1197,7 +1246,8 @@ return (
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -1208,7 +1258,8 @@ return (
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -1218,7 +1269,8 @@ return (
                   placeholder="Company Name"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -1229,12 +1281,27 @@ return (
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300 resize-none"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-4 border-2 border-[var(--primary-color)] rounded-lg hover:border-[var(--hover-yellow)] focus:border-[var(--hover-yellow)] focus:ring-0 transition-all duration-300 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 ></textarea>
               </div>
               <div className="flex justify-center mt-6">
-                <button type="submit" className="btn-primary px-10 py-3 rounded-lg">
-                  Submit
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="btn-primary px-10 py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : (
+                    'Submit'
+                  )}
                 </button>
               </div>
             </form>
@@ -1244,7 +1311,10 @@ return (
               <h3 className="text-2xl font-semibold text-green-600 mb-2">Thank You!</h3>
               <p className="text-gray-600 mb-6">Your submission has been received!</p>
               <button 
-                onClick={() => setIsSubmitted(false)}
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setSubmitError('');
+                }}
                 className="btn-secondary px-6 py-2"
               >
                 Send Another Message
