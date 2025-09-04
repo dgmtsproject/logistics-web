@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -14,13 +14,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Create transporter using Google Workspace SMTP
+    console.log('Creating nodemailer transporter with app password...');
+
+    // Using app password authentication
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: 'baba.trawally@tmhlogistics.com',
-        pass: 'TrawallyD1ko'
-      }
+        user: "baba.trawally@tmhlogistics.com",
+        pass: "nzay xcec rlap vjwj" // Your app password
+      },
     });
 
     // Email content
