@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     }
 
     // Create transporter using Google Workspace SMTP
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: 'baba.trawally@tmhlogistics.com',
